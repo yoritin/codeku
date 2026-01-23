@@ -38,7 +38,7 @@ jobs:
       - name: Publish to VS Code Marketplace
         run: |
           cd packages/extension
-          pnpm vsce publish -p ${{ secrets.VSCE_PAT }}
+          npx vsce publish -p ${{ secrets.VSCE_PAT }}
         
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v1
