@@ -1,4 +1,4 @@
-# Codoku（コードク）
+# Codeku（コードク）
 
 > コードを「読む」- Display Japanese readings for code identifiers on hover
 
@@ -39,10 +39,10 @@ const getUserName = () => { ... }
 
 | Setting               | Description         | Default               |
 | --------------------- | ------------------- | --------------------- |
-| `codoku.enabled`      | 拡張機能の有効/無効 | `true`                |
-| `codoku.languages`    | 有効にする言語      | `["typescript", ...]` |
-| `codoku.showOriginal` | 元の単語も表示      | `true`                |
-| `codoku.readingStyle` | 読みのスタイル      | `"katakana"`          |
+| `codeku.enabled`      | 拡張機能の有効/無効 | `true`                |
+| `codeku.languages`    | 有効にする言語      | `["typescript", ...]` |
+| `codeku.showOriginal` | 元の単語も表示      | `true`                |
+| `codeku.readingStyle` | 読みのスタイル      | `"katakana"`          |
 
 ### Reading Styles
 
@@ -59,7 +59,7 @@ const getUserName = () => { ... }
 
 辞書データの追加など、貢献を歓迎します！
 
-[GitHub Repository](https://github.com/yoritin/codoku)
+[GitHub Repository](https://github.com/yoritin/codeku)
 
 ## Release Notes
 

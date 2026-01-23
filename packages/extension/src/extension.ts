@@ -1,10 +1,10 @@
 import * as vscode from 'vscode'
-import { CodokuHoverProvider } from './providers/hoverProvider'
+import { CodekuHoverProvider } from './providers/hoverProvider'
 
 export function activate(context: vscode.ExtensionContext): void {
-  console.log('Codoku is now active!')
+  console.log('Codeku is now active!')
 
-  const config = vscode.workspace.getConfiguration('codoku')
+  const config = vscode.workspace.getConfiguration('codeku')
   const languages = config.get<string[]>('languages') || [
     'typescript',
     'javascript',
@@ -16,7 +16,7 @@ export function activate(context: vscode.ExtensionContext): void {
   ]
 
   // Register hover provider for each language
-  const hoverProvider = new CodokuHoverProvider()
+  const hoverProvider = new CodekuHoverProvider()
 
   for (const language of languages) {
     const disposable = vscode.languages.registerHoverProvider(
@@ -27,11 +27,11 @@ export function activate(context: vscode.ExtensionContext): void {
   }
 
   // Register toggle command
-  const toggleCommand = vscode.commands.registerCommand('codoku.toggle', () => {
+  const toggleCommand = vscode.commands.registerCommand('codeku.toggle', () => {
     const currentEnabled = config.get<boolean>('enabled')
     config.update('enabled', !currentEnabled, vscode.ConfigurationTarget.Global)
     vscode.window.showInformationMessage(
-      `Codoku ${!currentEnabled ? 'enabled' : 'disabled'}`,
+      `Codeku ${!currentEnabled ? 'enabled' : 'disabled'}`,
     )
   })
 
@@ -39,5 +39,5 @@ export function activate(context: vscode.ExtensionContext): void {
 }
 
 export function deactivate(): void {
-  console.log('Codoku is now deactivated')
+  console.log('Codeku is now deactivated')
 }

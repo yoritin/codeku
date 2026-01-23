@@ -9,7 +9,7 @@ export interface AbbreviationEntry {
   fullForm?: string
 }
 
-export interface CodokuConfig {
+export interface CodekuConfig {
   enabled: boolean
   languages: string[]
   showOriginal: boolean

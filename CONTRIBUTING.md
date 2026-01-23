@@ -1,6 +1,6 @@
-# Contributing to Codoku
+# Contributing to Codeku
 
-Codokuへの貢献ありがとうございます！🎉
+Codekuへの貢献ありがとうございます！🎉
 
 ## 開発環境のセットアップ
 

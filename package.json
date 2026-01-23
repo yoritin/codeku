@@ -1,15 +1,15 @@
 {
-  "name": "codoku",
+  "name": "codeku",
   "version": "0.1.0",
   "private": true,
   "description": "Display Japanese readings for code identifiers on hover",
   "scripts": {
-    "dev:extension": "pnpm --filter @codoku/extension dev",
-    "build:extension": "pnpm --filter @codoku/extension build",
-    "package:extension": "pnpm --filter @codoku/extension package",
-    "dev:web": "pnpm --filter @codoku/web dev",
-    "build:web": "pnpm --filter @codoku/web build",
-    "test": "pnpm --filter @codoku/extension test",
+    "dev:extension": "pnpm --filter @codeku/extension dev",
+    "build:extension": "pnpm --filter @codeku/extension build",
+    "package:extension": "pnpm --filter @codeku/extension package",
+    "dev:web": "pnpm --filter @codeku/web dev",
+    "build:web": "pnpm --filter @codeku/web build",
+    "test": "pnpm --filter @codeku/extension test",
     "lint": "pnpm -r lint"
   },
   "keywords": [

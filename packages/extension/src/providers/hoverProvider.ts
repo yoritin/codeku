@@ -2,7 +2,7 @@ import * as vscode from 'vscode'
 import { DictionaryService } from '../services/dictionary'
 import { Tokenizer } from '../services/tokenizer'
 
-export class CodokuHoverProvider implements vscode.HoverProvider {
+export class CodekuHoverProvider implements vscode.HoverProvider {
   private dictionary: DictionaryService
   private tokenizer: Tokenizer
 
@@ -15,7 +15,7 @@ export class CodokuHoverProvider implements vscode.HoverProvider {
     document: vscode.TextDocument,
     position: vscode.Position,
   ): vscode.ProviderResult<vscode.Hover> {
-    const config = vscode.workspace.getConfiguration('codoku')
+    const config = vscode.workspace.getConfiguration('codeku')
 
     if (!config.get<boolean>('enabled')) {
       return null
@@ -53,7 +53,7 @@ export class CodokuHoverProvider implements vscode.HoverProvider {
   }
 
   private getReadings(tokens: string[]): string[] {
-    const config = vscode.workspace.getConfiguration('codoku')
+    const config = vscode.workspace.getConfiguration('codeku')
     const style = config.get<string>('readingStyle') || 'katakana'
 
     return tokens.map((token) => {

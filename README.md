@@ -6,7 +6,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)](https://opensource.org/licenses/MIT)
 
 <p align="center">
-  <img src="./assets/demo.gif" alt="Codoku Demo" width="600">
+  <img src="./assets/demo.gif" alt="Codeku Demo" width="600">
 </p>
 
 ## ✨ Features
@@ -40,10 +40,10 @@
 
 | Setting               | Description                                         | Default                                                |
 | --------------------- | --------------------------------------------------- | ------------------------------------------------------ |
-| `codoku.enabled`      | 拡張機能の有効/無効                                 | `true`                                                 |
-| `codoku.languages`    | 有効にする言語                                      | `["typescript", "javascript", "python", "go", "rust"]` |
-| `codoku.showOriginal` | 元の単語も表示                                      | `true`                                                 |
-| `codoku.readingStyle` | 読みのスタイル (`katakana` / `hiragana` / `romaji`) | `"katakana"`                                           |
+| `codeku.enabled`      | 拡張機能の有効/無効                                 | `true`                                                 |
+| `codeku.languages`    | 有効にする言語                                      | `["typescript", "javascript", "python", "go", "rust"]` |
+| `codeku.showOriginal` | 元の単語も表示                                      | `true`                                                 |
+| `codeku.readingStyle` | 読みのスタイル (`katakana` / `hiragana` / `romaji`) | `"katakana"`                                           |
 
 ## 🤝 Contributing
 

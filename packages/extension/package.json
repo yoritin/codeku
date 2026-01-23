@@ -50,14 +50,14 @@
   "main": "./dist/extension.js",
   "contributes": {
     "configuration": {
-      "title": "Codoku",
+      "title": "Codeku",
       "properties": {
-        "codoku.enabled": {
+        "codeku.enabled": {
           "type": "boolean",
           "default": true,
-          "description": "Enable or disable Codoku"
+          "description": "Enable or disable Codeku"
         },
-        "codoku.languages": {
+        "codeku.languages": {
           "type": "array",
           "items": {
             "type": "string"
@@ -81,14 +81,14 @@
             "scss",
             "graphql"
           ],
-          "description": "Languages to enable Codoku for"
+          "description": "Languages to enable Codeku for"
         },
-        "codoku.showOriginal": {
+        "codeku.showOriginal": {
           "type": "boolean",
           "default": true,
           "description": "Show original word alongside reading"
         },
-        "codoku.readingStyle": {
+        "codeku.readingStyle": {
           "type": "string",
           "enum": [
             "katakana",
@@ -102,8 +102,8 @@
     },
     "commands": [
       {
-        "command": "codoku.toggle",
-        "title": "Codoku: Toggle Enable/Disable"
+        "command": "codeku.toggle",
+        "title": "Codeku: Toggle Enable/Disable"
       }
     ]
   },

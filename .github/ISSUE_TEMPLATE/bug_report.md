@@ -29,7 +29,7 @@ If applicable, add screenshots to help explain your problem.
 ## Environment
 
 - VS Code Version: [e.g. 1.85.0]
-- Codoku Version: [e.g. 0.1.0]
+- Codeku Version: [e.g. 0.1.0]
 - OS: [e.g. macOS 14.0]
 
 ## Additional context
