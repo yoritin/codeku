@@ -34,6 +34,7 @@
 - Python
 - Go
 - Rust
+- GraphQL
 
 ## ⚙️ Settings
 
