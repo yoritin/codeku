@@ -2,7 +2,7 @@
   "name": "codeku",
   "displayName": "Codeku",
   "description": "Display Japanese readings for code identifiers on hover",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "publisher": "yoritin",
   "icon": "icon.png",
   "repository": {
