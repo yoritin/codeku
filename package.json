@@ -1,0 +1,28 @@
+{
+  "name": "codoku",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Display Japanese readings for code identifiers on hover",
+  "scripts": {
+    "dev:extension": "pnpm --filter @codoku/extension dev",
+    "build:extension": "pnpm --filter @codoku/extension build",
+    "package:extension": "pnpm --filter @codoku/extension package",
+    "dev:web": "pnpm --filter @codoku/web dev",
+    "build:web": "pnpm --filter @codoku/web build",
+    "test": "pnpm --filter @codoku/extension test",
+    "lint": "pnpm -r lint"
+  },
+  "keywords": [
+    "vscode",
+    "extension",
+    "japanese",
+    "reading",
+    "pronunciation"
+  ],
+  "author": "",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0",
+    "pnpm": ">=8.0.0"
+  }
+}

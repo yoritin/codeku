@@ -1,0 +1,129 @@
+{
+  "name": "codeku",
+  "displayName": "Codeku",
+  "description": "Display Japanese readings for code identifiers on hover",
+  "version": "0.1.0",
+  "publisher": "yoritin",
+  "icon": "icon.png",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yoritin/codeku"
+  },
+  "bugs": {
+    "url": "https://github.com/yoritin/codeku/issues"
+  },
+  "homepage": "https://yoritin.github.io/codeku/",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "keywords": [
+    "japanese",
+    "reading",
+    "pronunciation",
+    "hover",
+    "i18n",
+    "yomigana",
+    "furigana"
+  ],
+  "activationEvents": [
+    "onLanguage:typescript",
+    "onLanguage:javascript",
+    "onLanguage:typescriptreact",
+    "onLanguage:javascriptreact",
+    "onLanguage:python",
+    "onLanguage:go",
+    "onLanguage:rust",
+    "onLanguage:markdown",
+    "onLanguage:yaml",
+    "onLanguage:yml",
+    "onLanguage:sql",
+    "onLanguage:json",
+    "onLanguage:jsonc",
+    "onLanguage:html",
+    "onLanguage:css",
+    "onLanguage:scss"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "configuration": {
+      "title": "Codoku",
+      "properties": {
+        "codoku.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable or disable Codoku"
+        },
+        "codoku.languages": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": [
+            "typescript",
+            "javascript",
+            "typescriptreact",
+            "javascriptreact",
+            "python",
+            "go",
+            "rust",
+            "markdown",
+            "yaml",
+            "yml",
+            "sql",
+            "json",
+            "jsonc",
+            "html",
+            "css",
+            "scss"
+          ],
+          "description": "Languages to enable Codoku for"
+        },
+        "codoku.showOriginal": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show original word alongside reading"
+        },
+        "codoku.readingStyle": {
+          "type": "string",
+          "enum": [
+            "katakana",
+            "hiragana",
+            "romaji"
+          ],
+          "default": "katakana",
+          "description": "Style for displaying readings"
+        }
+      }
+    },
+    "commands": [
+      {
+        "command": "codoku.toggle",
+        "title": "Codoku: Toggle Enable/Disable"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "pnpm run build",
+    "dev": "esbuild ./src/extension.ts --bundle --outfile=dist/extension.js --external:vscode --format=cjs --platform=node --watch",
+    "build": "esbuild ./src/extension.ts --bundle --outfile=dist/extension.js --external:vscode --format=cjs --platform=node --minify",
+    "package": "vsce package --no-dependencies",
+    "publish": "vsce publish --no-dependencies",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "lint": "eslint src --ext ts"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "@types/vscode": "^1.85.0",
+    "@typescript-eslint/eslint-plugin": "^6.13.0",
+    "@typescript-eslint/parser": "^6.13.0",
+    "@vscode/vsce": "^2.22.0",
+    "esbuild": "^0.19.8",
+    "eslint": "^8.55.0",
+    "typescript": "^5.3.2",
+    "vitest": "^1.0.4"
+  }
+}

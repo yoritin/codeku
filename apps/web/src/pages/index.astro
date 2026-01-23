@@ -1,0 +1,369 @@
+---
+const title = "Codeku - コードを「読む」";
+const description = "Display Japanese readings for code identifiers on hover";
+---
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content={description}>
+  <title>{title}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --color-bg: #0f0f23;
+      --color-surface: #1a1a2e;
+      --color-primary: #00d4ff;
+      --color-secondary: #ff6b9d;
+      --color-text: #e4e4e7;
+      --color-muted: #71717a;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      background: var(--color-bg);
+      color: var(--color-text);
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Hero */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 80px 24px;
+    }
+
+    .logo {
+      font-size: 4rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .tagline {
+      font-size: 1.5rem;
+      color: var(--color-muted);
+      margin-bottom: 2rem;
+    }
+
+    .tagline-jp {
+      font-size: 1.25rem;
+      color: var(--color-text);
+      margin-bottom: 3rem;
+    }
+
+    .demo-container {
+      background: var(--color-surface);
+      border-radius: 12px;
+      padding: 32px;
+      margin-bottom: 3rem;
+      max-width: 600px;
+      width: 100%;
+    }
+
+    .code-block {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1.1rem;
+      text-align: left;
+    }
+
+    .keyword { color: #c586c0; }
+    .function { color: #dcdcaa; }
+    .variable { color: #9cdcfe; }
+    .string { color: #ce9178; }
+    .comment { color: #6a9955; }
+
+    .hover-tooltip {
+      display: inline-block;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .hover-tooltip::after {
+      content: attr(data-reading);
+      position: absolute;
+      bottom: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--color-primary);
+      color: var(--color-bg);
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      white-space: nowrap;
+      opacity: 0;
+      transition: opacity 0.2s;
+      pointer-events: none;
+    }
+
+    .hover-tooltip:hover::after {
+      opacity: 1;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 28px;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-primary {
+      background: var(--color-primary);
+      color: var(--color-bg);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--color-text);
+      border: 2px solid var(--color-muted);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--color-primary);
+    }
+
+    /* Features */
+    .features {
+      padding: 100px 24px;
+    }
+
+    .section-title {
+      font-size: 2rem;
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 32px;
+    }
+
+    .feature-card {
+      background: var(--color-surface);
+      padding: 32px;
+      border-radius: 12px;
+      transition: transform 0.2s;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-4px);
+    }
+
+    .feature-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .feature-title {
+      font-size: 1.25rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .feature-desc {
+      color: var(--color-muted);
+    }
+
+    /* Install */
+    .install {
+      padding: 100px 24px;
+      text-align: center;
+    }
+
+    .install-steps {
+      background: var(--color-surface);
+      border-radius: 12px;
+      padding: 32px;
+      max-width: 600px;
+      margin: 0 auto 2rem;
+      text-align: left;
+    }
+
+    .install-steps ol {
+      padding-left: 1.5rem;
+    }
+
+    .install-steps li {
+      margin-bottom: 1rem;
+      color: var(--color-muted);
+    }
+
+    .install-steps code {
+      background: var(--color-bg);
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--color-primary);
+    }
+
+    /* Footer */
+    .footer {
+      padding: 48px 24px;
+      text-align: center;
+      border-top: 1px solid var(--color-surface);
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+      margin-bottom: 1.5rem;
+    }
+
+    .footer-links a {
+      color: var(--color-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover {
+      color: var(--color-primary);
+    }
+
+    .footer-copy {
+      color: var(--color-muted);
+      font-size: 0.875rem;
+    }
+
+    @media (max-width: 640px) {
+      .logo {
+        font-size: 2.5rem;
+      }
+      .tagline {
+        font-size: 1.2rem;
+      }
+      .code-block {
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Hero -->
+  <section class="hero">
+    <h1 class="logo">Codeku</h1>
+    <p class="tagline">コードク</p>
+    <p class="tagline-jp">コードを「読む」VS Code 拡張機能</p>
+
+    <div class="demo-container">
+      <div class="code-block">
+        <span class="keyword">const</span> <span class="hover-tooltip variable" data-reading="📖 ゲット ユーザー ネーム">getUserName</span> = <span class="keyword">async</span> () =&gt; &#123;<br>
+        &nbsp;&nbsp;<span class="keyword">const</span> <span class="hover-tooltip variable" data-reading="📖 レスポンス">response</span> = <span class="keyword">await</span> <span class="hover-tooltip function" data-reading="📖 フェッチ">fetch</span>(<span class="string">'/api/user'</span>);<br>
+        &nbsp;&nbsp;<span class="keyword">return</span> <span class="variable">response</span>.<span class="hover-tooltip function" data-reading="📖 ジェイソン">json</span>();<br>
+        &#125;;
+      </div>
+    </div>
+
+    <p style="color: var(--color-muted); margin-bottom: 2rem;">↑ 識別子にホバーしてみてください</p>
+
+    <div class="cta-buttons">
+      <a href="https://marketplace.visualstudio.com/items?itemName=yoritin.codeku" class="btn btn-primary">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M23.15 2.587L18.21.21a1.494 1.494 0 0 0-1.705.29l-9.46 8.63-4.12-3.128a.999.999 0 0 0-1.276.057L.327 7.261A1 1 0 0 0 .326 8.74L3.899 12 .326 15.26a1 1 0 0 0 .001 1.479L1.65 17.94a.999.999 0 0 0 1.276.057l4.12-3.128 9.46 8.63a1.492 1.492 0 0 0 1.704.29l4.942-2.377A1.5 1.5 0 0 0 24 20.06V3.939a1.5 1.5 0 0 0-.85-1.352zm-5.146 14.861L10.826 12l7.178-5.448v10.896z"/>
+        </svg>
+        Install
+      </a>
+      <a href="https://github.com/yoritin/codeku" class="btn btn-secondary">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/>
+        </svg>
+        GitHub
+      </a>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="features">
+    <div class="container">
+      <h2 class="section-title">Features</h2>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">📖</div>
+          <h3 class="feature-title">ホバーで読みを表示</h3>
+          <p class="feature-desc">変数名、関数名、クラス名などにマウスをホバーすると、日本語の読み（カタカナ）がツールチップで表示されます。</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🔤</div>
+          <h3 class="feature-title">識別子の自動分割</h3>
+          <p class="feature-desc">camelCase, PascalCase, snake_case, kebab-case を自動認識し、単語ごとに分割して読みを表示します。</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">💻</div>
+          <h3 class="feature-title">プログラミング略語対応</h3>
+          <p class="feature-desc">API, HTTP, JSON, URLなど、プログラミングでよく使われる略語にも対応しています。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Install -->
+  <section class="install">
+    <div class="container">
+      <h2 class="section-title">Installation</h2>
+      <div class="install-steps">
+        <ol>
+          <li>VS Code を開く</li>
+          <li>Extensions (<code>Ctrl+Shift+X</code> / <code>Cmd+Shift+X</code>) を開く</li>
+          <li><code>Codeku</code> で検索</li>
+          <li>Install をクリック</li>
+        </ol>
+      </div>
+      <a href="https://marketplace.visualstudio.com/items?itemName=yoritin.codeku" class="btn btn-primary">
+        Marketplace で見る
+      </a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-links">
+      <a href="https://github.com/yoritin/codeku">GitHub</a>
+      <a href="https://github.com/yoritin/codeku/issues">Issues</a>
+      <a href="https://github.com/yoritin/codeku/blob/main/CONTRIBUTING.md">Contributing</a>
+      <a href="https://github.com/yoritin/codeku/blob/main/LICENSE">License</a>
+    </div>
+    <p class="footer-copy">
+      MIT License © 2025 Codeku Contributors
+    </p>
+  </footer>
+</body>
+</html>
