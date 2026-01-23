@@ -8,38 +8,38 @@ on:
 jobs:
   release:
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-          
+
       - name: Setup pnpm
         uses: pnpm/action-setup@v2
         with:
           version: 8
-          
+
       - name: Install dependencies
         run: pnpm install
-        
+
       - name: Run tests
         run: pnpm test
-        
+
       - name: Build extension
         run: pnpm build:extension
-        
+
       - name: Package extension
         run: pnpm package:extension
-        
+
       - name: Publish to VS Code Marketplace
         run: |
           cd packages/extension
-          npx vsce publish -p ${{ secrets.VSCE_PAT }}
-        
+          pnpm exec vsce publish -p ${{ secrets.VSCE_PAT }}
+
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v1
         with:
